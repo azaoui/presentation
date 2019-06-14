@@ -14,6 +14,7 @@ INSERT INTO contact VALUES(1,'ahmed','azaoui@eee.com','122222');
 # demo 2
 
  mvn thorntail:run
+ 
  java -jar target/demo-thorntail.jar
 
 
