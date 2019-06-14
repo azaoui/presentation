@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  mysql-docker-container:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: Root123456_
+      MYSQL_DATABASE: hibernate1
+    ports:
+    - 3399:3306
+    volumes:
+    - "${PWD}/target/data:/var/lib/mysql"
+  spring-boot-jpa-app:
+    image: spring-boot-jpa1-image
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+    - mysql-docker-container
+    ports:
+    - 8087:8080
+    volumes:
+    - /data/spring-boot-app
