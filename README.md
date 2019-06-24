@@ -241,5 +241,7 @@ spec:
     app: employee
 ```
 
+If you set the type field to NodePort, the Kubernetes control plane will allocate a port from a range specified by --service-node-port-range flag (default: 30000-32767). Each node will proxy that port each (the same port number on every Node) into your Service. Your service will report that allocated port in its .spec.ports[*].nodePort field.
 
 NodePort: Exposes the service on each Node’s IP at a static port (the NodePort). A ClusterIP service, to which the NodePort service will route, is automatically created. You’ll be able to contact the NodePort service, from outside the cluster, by requesting <NodeIP>:<NodePort>.
+
