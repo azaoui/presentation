@@ -154,5 +154,89 @@ spec:
               key: database-password
 ```
 
+#### Create Service
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+spec:
+  ports:
+  - port: 27017
+    protocol: TCP
+  selector:
+    app: mongodb
+```
+
+https://kubernetes.io/docs/concepts/services-networking/service/
+
+A Service is an abstraction which defines a logical set of Pods and a policy by which to access them.
+
+This specification will create a new Service object named “mongodb” which targets TCP port 27017 on any Pod with the "app=mongodb" label.
+Note: A Service can map any incoming port to a targetPort. By default, and for convenience, the targetPort will be set to the same value as the port field.
 
 
+
+
+
+#### Create sample microservice : employees:
+
+
+#### Create Deployment and service for the employee microservice:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: organization
+  labels:
+    app: organization
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: organization
+  template:
+    metadata:
+      labels:
+        app: organization
+    spec:
+      containers:
+      - name: organization
+        image: piomin/organization:1.0
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGO_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: mongodb
+              key: database-name
+        - name: MONGO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb
+              key: database-user
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb
+              key: database-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: organization
+  labels:
+    app: organization
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    app: organization
+    
+ ```
