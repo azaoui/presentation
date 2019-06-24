@@ -191,22 +191,22 @@ Note: A Service can map any incoming port to a targetPort. By default, and for c
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: organization
+  name: employee
   labels:
-    app: organization
+    app: employee
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: organization
+      app: employee
   template:
     metadata:
       labels:
-        app: organization
+        app: employee
     spec:
       containers:
-      - name: organization
-        image: piomin/organization:1.0
+      - name: employee
+        image: piomin/employee:1.0
         ports:
         - containerPort: 8080
         env:
@@ -229,14 +229,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: organization
+  name: employee
   labels:
-    app: organization
+    app: employee
 spec:
   ports:
-  - port: 8080
-    protocol: TCP
+  - protocol: TCP
+    port: 8080
+  type: NodePort
   selector:
-    app: organization
-    
- ```
+    app: employee
+```
+
+
+NodePort: Exposes the service on each Node’s IP at a static port (the NodePort). A ClusterIP service, to which the NodePort service will route, is automatically created. You’ll be able to contact the NodePort service, from outside the cluster, by requesting <NodeIP>:<NodePort>.
