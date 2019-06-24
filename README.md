@@ -9,7 +9,7 @@ CREATE TABLE `contact` (`id` INT NOT NULL,   `name` VARCHAR(255) NULL,   `email`
 
 ALTER TABLE `contact` CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ,ADD UNIQUE INDEX `id_UNIQUE` (`id` ASC);
 
-INSERT INTO contact VALUES(1,'ahmed','azaoui@eee.com','122222');
+INSERT INTO contact VALUES(1,'ahmed','dev.zaouiahmed@gmail.com','122222');
 ```
 # demo 2
 
