@@ -21,11 +21,11 @@ INSERT INTO contact VALUES(1,'ahmed','dev.zaouiahmed@gmail.com','122222');
 
 # demo 3 
 
-#### before to start: (with minikube) : https://kubernetes.io/docs/tasks/tools/install-minikube/
+#### before to start: (with minikube) :
 
 1. Install an Hypervison : VirtualBox
-2. Install Minikube
-3. Install kubectl
+2. Install Minikube : https://kubernetes.io/docs/tasks/tools/install-minikube/
+3. Install kubectl  : https://kubernetes.io/docs/tasks/tools/install-kubectl/
 4. minikube start
 
 ###### Check your installation :
@@ -111,6 +111,48 @@ data:
 
 kubectl create -f mongodb-configmap.yaml
 
+
+#### Create Deployment
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:latest
+        ports:
+        - containerPort: 27017
+        env:
+        - name: MONGO_INITDB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: mongodb
+              key: database-name
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb
+              key: database-user
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb
+              key: database-password
+```
 
 
 
