@@ -6,6 +6,7 @@ docker run azaoui/hibernatex
 docker-compose up from  directory spring-boot/
 docker ps
 Connect to mysql docker image exec -i -t 32e5458d2923  /bin/bash
+docker exec -i -t 4d30da675b81  /bin/bash
 
 ```sql
 CREATE TABLE `contact` (`id` INT NOT NULL,   `name` VARCHAR(255) NULL,   `email` VARCHAR(255) NULL,   `phone` VARCHAR(45) NULL,   PRIMARY KEY (`id`));
