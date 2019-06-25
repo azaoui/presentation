@@ -1,5 +1,8 @@
 # demo 1
 
+docker build -t azaoui/hibernatex .
+docker run azaoui/hibernatex
+
 docker-compose up from  directory spring-boot/
 docker ps
 Connect to mysql docker image exec -i -t 32e5458d2923  /bin/bash
