@@ -1,3 +1,6 @@
+https://www.youtube.com/watch?v=D0OtWlMkBLI
+
+
 # demo 1
 
 docker build -t azaoui/hibernatex .
